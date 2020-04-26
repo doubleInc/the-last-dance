@@ -12,7 +12,7 @@ import "../css/main.css";
 
 const Main = ({ children }) => (
   <div>
-    <Navbar />
+    <Navbar usrImage="https://www.nicepng.com/png/full/198-1987193_any-transparent-studio-ghibli-photos-and-or-gifs.png" />
     <Router>
       <Home path="/" />
       <Dashboard path="dashboard" />

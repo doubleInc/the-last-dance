@@ -1,16 +1,21 @@
 import React from "react";
 import { Link } from "@reach/router";
+import { css } from "@emotion/core";
 
 // css styling from separate file
-import { linkText, linkButton, theme, useStyles } from "./navbar.styles";
-// materialui components
 import {
-  makeStyles,
-  ThemeProvider,
-  createMuiTheme,
-} from "@material-ui/core/styles";
+  linkText,
+  linkButton,
+  theme,
+  useStyles,
+  logo,
+  avatarStyle,
+} from "./navbar.styles";
+// materialui components
+import { ThemeProvider } from "@material-ui/core/styles";
 import {
   AppBar,
+  Avatar,
   Typography,
   Toolbar,
   Button,
@@ -18,7 +23,7 @@ import {
 } from "@material-ui/core";
 import EcoIcon from "@material-ui/icons/Eco";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const classes = useStyles();
 
   return (
@@ -32,11 +37,14 @@ export default function Navbar() {
               color="inherit"
               aria-label="menu"
             >
-              <EcoIcon />
+              <Link css={linkText} to="/">
+                <EcoIcon css={logo} />
+              </Link>
             </IconButton>
             <Typography variant="h6" className={classes.title}>
               CycleIT
             </Typography>
+            <Avatar css={avatarStyle} alt="User avatar" src={props.usrImage} />
             <Button css={linkButton()}>
               <Link css={linkText} to="dashboard">
                 Dashboard
