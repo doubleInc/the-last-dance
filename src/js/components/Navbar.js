@@ -1,18 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "@reach/router";
-import { css } from "@emotion/core";
+import { css, ClassNames } from "@emotion/core";
 
 // css styling from separate file
 import {
   linkText,
   linkButton,
-  theme,
-  useStyles,
   logo,
+  logoText,
   avatarStyle,
+  classes,
 } from "./navbar.styles";
 // materialui components
-import { ThemeProvider } from "@material-ui/core/styles";
 import {
   AppBar,
   Avatar,
@@ -22,30 +21,44 @@ import {
   IconButton,
 } from "@material-ui/core";
 import EcoIcon from "@material-ui/icons/Eco";
+// from material color library
+import green from "@material-ui/core/colors/green";
 
-export default function Navbar(props) {
-  const classes = useStyles();
+class Navbar extends Component {
+  state = {
+    loggedIn: false,
+  };
 
-  return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <AppBar position="static" color="primary">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-            >
+  static LoggedIN = ({ children }) => children;
+  static LoggedOUT = ({ children }) => children;
+
+  render() {
+    return (
+      <div
+        css={css`
+          flex-grow: 1;
+        `}
+      >
+        <AppBar position="static">
+          <Toolbar
+            css={css`
+              background-color: ${green[900]};
+            `}
+          >
+            <IconButton edge="start" color="inherit" aria-label="menu">
               <Link css={linkText} to="/">
-                <EcoIcon css={logo} />
+                <EcoIcon css={logo} style={{ fontSize: "2em" }} />
               </Link>
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
+            <Typography variant="h6" css={logoText}>
               CycleIT
             </Typography>
-            <Avatar css={avatarStyle} alt="User avatar" src={props.usrImage} />
-            <Button css={linkButton()}>
+            <Avatar
+              css={avatarStyle}
+              alt="User avatar"
+              src={this.props.usrImage}
+            />
+            <Button style={classes.loginDash}>
               <Link css={linkText} to="dashboard">
                 Dashboard
               </Link>
@@ -53,6 +66,8 @@ export default function Navbar(props) {
           </Toolbar>
         </AppBar>
       </div>
-    </ThemeProvider>
-  );
+    );
+  }
 }
+
+export default Navbar;

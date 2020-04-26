@@ -17,6 +17,7 @@ const colors = {
 // emotionjs css
 export const linkText = css`
   text-decoration: none;
+  color: ${colors.white};
   }
 `;
 export const linkButton = (color = colors.white) => css`
@@ -24,12 +25,17 @@ export const linkButton = (color = colors.white) => css`
 `;
 export const logo = css`
   text-decoration: none;
-  font-size: 1.6em;
+  font-size: 1em;
   color: ${colors.white};
 `;
 export const avatarStyle = css`
   margin-right: 0.25em;
   border: 1px solid ${colors.white};
+`;
+
+export const logoText = css`
+  flex-grow: 1;
+  color: white;
 `;
 
 // extend materialui themes and styles(classes)
@@ -54,3 +60,7 @@ export const theme = createMuiTheme({
     primary: colors.primary,
   },
 });
+
+export const classes = {
+  loginDash: { backgroundColor: green[900], border: "1px solid white" },
+};
