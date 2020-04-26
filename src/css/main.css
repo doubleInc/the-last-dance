@@ -1,0 +1,19 @@
+body {
+  background-color: darkgrey;
+}
+
+/* nav ul {
+  list-style-type: none;
+} */
+
+.link {
+  text-decoration: none;
+  color: blanchedalmond;
+}
+
+.link:hover,
+.link:visited,
+.link:link,
+.link:active {
+  color: white;
+}
