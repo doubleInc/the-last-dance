@@ -15,7 +15,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 const Main = ({ children }) => (
   <div>
     <CssBaseline />
-    <Navbar usrImage="https://www.nicepng.com/png/full/198-1987193_any-transparent-studio-ghibli-photos-and-or-gifs.png" />
+    <Navbar usrImage="https://www.nicepng.com/png/full/198-1987193_any-transparent-studio-ghibli-photos-and-or-gifs.png">
+      <Navbar.LoggedIn />
+    </Navbar>
     <Router>
       <Home path="/" />
       <Dashboard path="dashboard" />

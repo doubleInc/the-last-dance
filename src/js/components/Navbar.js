@@ -29,6 +29,19 @@ class Navbar extends Component {
     loggedIn: false,
   };
 
+  static LoggedIn = ({ on, usrimg }) =>
+    on ? (
+      <React.Fragment>
+        <Avatar css={avatarStyle} alt="User avatar" src={usrimg} />
+        <Button style={classes.loginDash}>
+          <Link css={linkText} to="dashboard">
+            Dashboard
+          </Link>
+        </Button>
+      </React.Fragment>
+    ) : null;
+  static LoggedOut = (props) => <Button>Logged Out</Button>;
+
   render() {
     return (
       <div
@@ -50,16 +63,12 @@ class Navbar extends Component {
             <Typography variant="h6" css={logoText}>
               CycleIT
             </Typography>
-            <Avatar
-              css={avatarStyle}
-              alt="User avatar"
-              src={this.props.usrImage}
-            />
-            <Button style={classes.loginDash}>
-              <Link css={linkText} to="dashboard">
-                Dashboard
-              </Link>
-            </Button>
+            {React.Children.map(this.props.children, (child) =>
+              React.cloneElement(child, {
+                on: this.state.loggedIn,
+                usrimg: this.props.usrImage,
+              })
+            )}
           </Toolbar>
         </AppBar>
       </div>
