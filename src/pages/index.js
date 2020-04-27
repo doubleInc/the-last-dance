@@ -17,6 +17,7 @@ const Main = ({ children }) => (
     <CssBaseline />
     <Navbar usrImage="https://www.nicepng.com/png/full/198-1987193_any-transparent-studio-ghibli-photos-and-or-gifs.png">
       <Navbar.LoggedIn />
+      <Navbar.LoggedOut />
     </Navbar>
     <Router>
       <Home path="/" />

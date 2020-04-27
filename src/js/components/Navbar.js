@@ -2,15 +2,11 @@ import React, { Component } from "react";
 import { Link } from "@reach/router";
 import { css, ClassNames } from "@emotion/core";
 
+// dashboard compenent
+import Userdash from "./Userdash";
+
 // css styling from separate file
-import {
-  linkText,
-  linkButton,
-  logo,
-  logoText,
-  avatarStyle,
-  classes,
-} from "./navbar.styles";
+import { linkText, logo, logoText } from "./navbar.styles";
 // materialui components
 import {
   AppBar,
@@ -26,21 +22,13 @@ import green from "@material-ui/core/colors/green";
 
 class Navbar extends Component {
   state = {
-    loggedIn: false,
+    loggedIn: true,
   };
 
   static LoggedIn = ({ on, usrimg }) =>
-    on ? (
-      <React.Fragment>
-        <Avatar css={avatarStyle} alt="User avatar" src={usrimg} />
-        <Button style={classes.loginDash}>
-          <Link css={linkText} to="dashboard">
-            Dashboard
-          </Link>
-        </Button>
-      </React.Fragment>
-    ) : null;
-  static LoggedOut = (props) => <Button>Logged Out</Button>;
+    on ? <Userdash usrimg={usrimg} /> : null;
+
+  static LoggedOut = ({ on }) => (on ? null : <Button>Log In</Button>);
 
   render() {
     return (

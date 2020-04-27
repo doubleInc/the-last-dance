@@ -18,7 +18,6 @@ const colors = {
 export const linkText = css`
   text-decoration: none;
   color: ${colors.white};
-  }
 `;
 export const linkButton = (color = colors.white) => css`
   background-color: ${color};
@@ -60,7 +59,3 @@ export const theme = createMuiTheme({
     primary: colors.primary,
   },
 });
-
-export const classes = {
-  loginDash: { backgroundColor: green[900], border: "1px solid white" },
-};
