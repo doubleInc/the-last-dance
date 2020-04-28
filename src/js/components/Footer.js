@@ -8,7 +8,7 @@ const Footer = () => (
   <div
     style={{ margin: "auto", textAlign: "center" }}
     css={css`
-      background-color: gray;
+      background-color: #263238;
       color: white;
       padding-top: 1em;
     `}
