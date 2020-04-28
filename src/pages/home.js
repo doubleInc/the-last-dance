@@ -6,6 +6,7 @@ import { css, ClassNames } from "@emotion/core";
 //
 import Writeup from "../js/components/Writeup";
 import Mapoverlay from "../js/components/Maplay";
+import Footer from "../js/components/Footer";
 
 class Home extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class Home extends React.Component {
         <Container
           css={css`
             margin-top: 2em;
+            margin-bottom: 2em;
           `}
           fixed
         >
@@ -24,8 +26,8 @@ class Home extends React.Component {
             <Writeup />
             <Mapoverlay />
           </Typography>
-          />
         </Container>
+        <Footer />
       </React.Fragment>
     );
   }
