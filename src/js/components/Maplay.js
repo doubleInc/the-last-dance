@@ -28,9 +28,10 @@ class Mapoverlay extends React.Component {
 
   render() {
     const position = [this.state.lat, this.state.lng];
+    const start = [-33.8545702, 151.0255673];
     return (
       <React.Fragment>
-        <Map center={position} zoom={this.state.zoom}>
+        <Map center={start} zoom={this.state.zoom}>
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

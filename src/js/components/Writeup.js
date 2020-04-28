@@ -1,7 +1,5 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-
-import TextField from "@material-ui/core/TextField";
 import { css, ClassNames } from "@emotion/core";
 //Styles
 
@@ -18,7 +16,7 @@ const heroText = css`
   margin-bottom: -1em;
 `;
 
-const Writeup = () => {
+const Writeup = ({ children }) => {
   return (
     <div css={heroText}>
       <Typography css={heading} variant="h1" component="h2">
@@ -35,22 +33,8 @@ const Writeup = () => {
           consectetur, neque doloribus, cupiditate numquam dignissimos laborum
           fugiat deleniti? Eum quasi quidem quibusdam.
         </Typography>
+        {children}
       </Typography>
-      <form
-        noValidate
-        autoComplete="off"
-        css={css`
-          text-align: center;
-        `}
-      >
-        <TextField
-          id="standard-basic"
-          label="Enter your location"
-          css={css`
-            width: 300px;
-          `}
-        />
-      </form>
     </div>
   );
 };
