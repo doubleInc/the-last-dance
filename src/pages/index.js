@@ -5,6 +5,7 @@ import { Router, Link } from "@reach/router";
 import Navbar from "../js/components/Navbar";
 import Home from "./home";
 import Dashboard from "./dashboard";
+import Footer from "../js/components/Footer";
 //// for development only
 import { hot } from "react-hot-loader";
 // css file
@@ -23,6 +24,7 @@ const Main = ({ children }) => (
       <Home path="/" />
       <Dashboard path="dashboard" />
     </Router>
+    <Footer />
   </div>
 );
 

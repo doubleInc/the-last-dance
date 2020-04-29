@@ -8,10 +8,13 @@ import TextField from "@material-ui/core/TextField";
 // Components
 import Writeup from "../js/components/Writeup";
 import Mapoverlay from "../js/components/Maplay";
-import Footer from "../js/components/Footer";
 
 // Ajax calls
 import { getCoordinates } from "../js/Ajaxcalls";
+// firebase
+import { database, auth } from "../../firebase";
+//ramda
+import { props, compose, map } from "ramda";
 
 // Class component
 class Home extends React.Component {
@@ -19,20 +22,7 @@ class Home extends React.Component {
   state = {
     searchLocation: [-33.8548157, 151.2164539],
     searchValue: "",
-    locations: [
-      {
-        name: "Officeworks",
-        coords: { lat: -33.8420044, lng: 151.0373716 },
-        address: "298-300 Parramatta Rd, Auburn",
-        type: "technology",
-      },
-      {
-        name: "SUEZ Auburn Resource Recover",
-        coords: { lat: -33.8486752, lng: 151.054718 },
-        address: "Old Hill Link, Auburn, NSW",
-        type: "technology",
-      },
-    ],
+    locations: [],
   };
 
   //
@@ -54,6 +44,22 @@ class Home extends React.Component {
   handleChange = (event) => {
     this.setState({
       searchValue: event.target.value,
+    });
+  };
+
+  // component update before loading dom
+  componentDidMount = async () => {
+    // listen for any change("/" => root) in the db and return a snapshot
+    const starCountRef = await database.ref("/").on("value", (snapshot) => {
+      // everytime a change occurs in the db, it will be logged to console
+      //const locations = map(props(["coords"]));
+      const locations = snapshot.val();
+
+      console.log("Data changed", snapshot.val());
+
+      this.setState({
+        locations: locations,
+      });
     });
   };
 
@@ -98,7 +104,6 @@ class Home extends React.Component {
             />
           </Typography>
         </Container>
-        <Footer />
       </React.Fragment>
     );
   }
