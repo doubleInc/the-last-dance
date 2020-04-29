@@ -19,6 +19,20 @@ class Home extends React.Component {
   state = {
     searchLocation: [-33.8548157, 151.2164539],
     searchValue: "",
+    locations: [
+      {
+        name: "Officeworks",
+        coords: { lat: -33.8420044, lng: 151.0373716 },
+        address: "298-300 Parramatta Rd, Auburn",
+        type: "technology",
+      },
+      {
+        name: "SUEZ Auburn Resource Recover",
+        coords: { lat: -33.8486752, lng: 151.054718 },
+        address: "Old Hill Link, Auburn, NSW",
+        type: "technology",
+      },
+    ],
   };
 
   //
@@ -55,7 +69,7 @@ class Home extends React.Component {
         >
           <Typography
             component="div"
-            style={{ backgroundColor: "#cfe8fc", height: "100vh" }}
+            style={{ backgroundColor: "#cfe8fc", height: "830px" }}
           >
             <Writeup>
               <form
@@ -78,7 +92,10 @@ class Home extends React.Component {
                 />
               </form>
             </Writeup>
-            <Mapoverlay center={this.state.searchLocation} />
+            <Mapoverlay
+              center={this.state.searchLocation}
+              locations={this.state.locations}
+            />
           </Typography>
         </Container>
         <Footer />

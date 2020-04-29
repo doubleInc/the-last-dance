@@ -19,6 +19,16 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
+const Mapmarker = ({ name, coords, address }) => {
+  return (
+    <Marker position={[coords.lat, coords.lng]}>
+      <Popup>
+        {name}, <br /> {address}.
+      </Popup>
+    </Marker>
+  );
+};
+
 class Mapoverlay extends React.Component {
   state = {
     lat: 51.505,
@@ -27,9 +37,10 @@ class Mapoverlay extends React.Component {
   };
 
   render() {
-    const position = [this.state.lat, this.state.lng];
-    const start = [-33.8545702, 151.0255673];
-    console.log(this.props.center);
+    //console.log(this.props.center);
+
+    const locations = this.props.locations;
+
     return (
       <React.Fragment>
         <Map center={this.props.center} zoom={this.state.zoom}>
@@ -37,12 +48,9 @@ class Mapoverlay extends React.Component {
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={position}>
-            <Popup>
-              Lorem ipsum dolor sit amet, <br /> consectetur adipisicing elit.
-            </Popup>
-          </Marker>
-          <Marker position={[51, -0.08]} />
+          {locations.map((location) => (
+            <Mapmarker {...location} />
+          ))}
         </Map>
       </React.Fragment>
     );
