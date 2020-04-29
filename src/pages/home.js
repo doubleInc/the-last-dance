@@ -10,16 +10,29 @@ import Writeup from "../js/components/Writeup";
 import Mapoverlay from "../js/components/Maplay";
 import Footer from "../js/components/Footer";
 
+// Ajax calls
+import { getCoordinates } from "../js/Ajaxcalls";
+
+// Class component
 class Home extends React.Component {
+  // Test coordinates: auburn = [51, -0.08], uk [-33.8545702, 151.0255673]
   state = {
-    searchLocation: [-33.8545702, 151.0255673],
+    searchLocation: [-33.8548157, 151.2164539],
     searchValue: "",
   };
 
   //
-  locationLookup = (event) => {
+  locationLookup = async (event) => {
     event.preventDefault();
+
+    const res = await getCoordinates(this.state.searchValue);
+
+    const { lat, lng } = res;
+
+    console.log(res);
+
     this.setState({
+      searchLocation: [lat, lng],
       searchValue: "",
     });
   };
@@ -65,7 +78,7 @@ class Home extends React.Component {
                 />
               </form>
             </Writeup>
-            <Mapoverlay />
+            <Mapoverlay center={this.state.searchLocation} />
           </Typography>
         </Container>
         <Footer />
