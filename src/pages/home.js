@@ -52,10 +52,10 @@ class Home extends React.Component {
     // listen for any change("/" => root) in the db and return a snapshot
     const starCountRef = await database.ref("/").on("value", (snapshot) => {
       // everytime a change occurs in the db, it will be logged to console
-      //const locations = map(props(["coords"]));
-      const locations = snapshot.val();
-
-      //console.log("Data changed", snapshot.val());
+      const locations = [];
+      snapshot.forEach((child) => {
+        locations.push(child.val());
+      });
 
       this.setState({
         locations: locations,

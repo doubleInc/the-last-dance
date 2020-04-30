@@ -48,9 +48,11 @@ class Mapoverlay extends React.Component {
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {locations.map((location) => (
-            <Mapmarker {...location} />
-          ))}
+          {locations.map((location) =>
+            location.coords.lng !== undefined ? (
+              <Mapmarker {...location} />
+            ) : null
+          )}
         </Map>
       </React.Fragment>
     );

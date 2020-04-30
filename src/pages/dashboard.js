@@ -9,6 +9,9 @@ import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+// Ajax calls
+import { getCoordinates } from "../js/Ajaxcalls";
 // firebase
 import { database, auth } from "../../firebase";
 
@@ -23,12 +26,9 @@ const Dashboard = ({ user }) => {
   //
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState("");
-
-  const handleChange = (event) => {
-    setState(event.target.value);
-
-    console.log(event.target.value);
-  };
+  const [name, setName] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [suburb, setSuburb] = React.useState("");
 
   const handleClose = () => {
     setOpen(false);
@@ -36,6 +36,22 @@ const Dashboard = ({ user }) => {
 
   const handleOpen = () => {
     setOpen(true);
+  };
+
+  const captureValues = async (e) => {
+    e.preventDefault();
+
+    const coords = await getCoordinates(`${address}, ${suburb}, ${state}`);
+    const location = {
+      name,
+      address: `${address}, ${suburb}, ${state}`,
+      coords,
+      type: "technology",
+    };
+
+    // add or update "new greeting" key in db
+    await database.ref("/").push(location);
+    console.log(location);
   };
 
   return (
@@ -49,7 +65,25 @@ const Dashboard = ({ user }) => {
         fixed
       >
         <h2>Dashboard</h2>
-        <form>
+        <form onSubmit={captureValues}>
+          <TextField
+            id="name"
+            label=""
+            style={{ margin: 8 }}
+            placeholder="Organisation name"
+            helperText="Organisation name"
+            fullWidth
+            margin="normal"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            css={css`
+              width: 80%;
+            `}
+          />
+          <br />
           <TextField
             id="street"
             label=""
@@ -57,16 +91,24 @@ const Dashboard = ({ user }) => {
             placeholder="Street Address"
             helperText="Street address"
             fullWidth
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             margin="normal"
             InputLabelProps={{
               shrink: true,
             }}
+            css={css`
+              width: 80%;
+            `}
           />
+          <br />
           <TextField
             label="Suburb"
             defaultValue=""
             css={textFieldStyle}
             helperText="Suburb name"
+            value={suburb}
+            onChange={(e) => setSuburb(e.target.value)}
             style={{
               marginLeft: "0.5em",
               marginBottom: "1em",
@@ -87,8 +129,8 @@ const Dashboard = ({ user }) => {
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
-            value={""}
-            onChange={handleChange}
+            value={state}
+            onChange={(e) => setState(e.target.value)}
             css={css`
               width: 5em;
               margin-top: 0.5em;
@@ -105,6 +147,7 @@ const Dashboard = ({ user }) => {
           </Select>
           <Button
             variant="contained"
+            type="submit"
             style={{
               backgroundColor: "blue",
               marginLeft: "2em",
