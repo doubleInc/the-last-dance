@@ -8,6 +8,12 @@ const heading = css`
   font-weight: 100;
   color: #1b5e20;
   text-align: center;
+  @media (max-width: 1280px) {
+    font-size: 4em;
+  }
+  @media (max-width: 960px) {
+    font-size: 2.5em;
+  }
 `;
 
 const heroText = css`
@@ -28,10 +34,9 @@ const Writeup = ({ children }) => {
             color: #1b5e20;
           `}
         >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-          blanditiis tenetur unde suscipit, quam beatae rerum inventore
-          consectetur, neque doloribus, cupiditate numquam dignissimos laborum
-          fugiat deleniti? Eum quasi quidem quibusdam.
+          By recycling household waste you will help save precious natural
+          resources. Each year kerbside recycling can save 386,000 tonnes of
+          green house gasses. That's 64,000 cars off the road for a whole year!
         </Typography>
         {children}
       </Typography>

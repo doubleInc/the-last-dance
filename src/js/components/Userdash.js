@@ -1,6 +1,7 @@
 import React from "react";
 import { css, ClassNames } from "@emotion/core";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
+import { auth, googleAuthProvider } from "../../../firebase";
 import green from "@material-ui/core/colors/green";
 // materialui components
 import { Avatar, Button } from "@material-ui/core";
@@ -37,6 +38,18 @@ const Userdash = (props) => {
         <Link css={linkText} to="dashboard">
           Dashboard
         </Link>
+      </Button>
+      <Button
+        style={classes.loginDash}
+        onClick={() => {
+          auth.signOut();
+          navigate("/");
+        }}
+        css={css`
+          margin-left: 0.5em;
+        `}
+      >
+        Log Out
       </Button>
     </React.Fragment>
   );

@@ -55,7 +55,7 @@ class Home extends React.Component {
       //const locations = map(props(["coords"]));
       const locations = snapshot.val();
 
-      console.log("Data changed", snapshot.val());
+      //console.log("Data changed", snapshot.val());
 
       this.setState({
         locations: locations,

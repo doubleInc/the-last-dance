@@ -13,7 +13,7 @@ const Searchmap = () => {
     >
       <TextField
         id="standard-basic"
-        label="Enter your location"
+        label="Enter your suburb and state"
         css={css`
           width: 300px;
         `}
