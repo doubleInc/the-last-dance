@@ -23,12 +23,13 @@ const textFieldStyle = css`
 `;
 
 const Dashboard = ({ user }) => {
-  //
+  // state
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState("");
   const [name, setName] = React.useState("");
   const [address, setAddress] = React.useState("");
   const [suburb, setSuburb] = React.useState("");
+  const [feedback, setFeedback] = React.useState({ success: "", error: "" });
 
   const handleClose = () => {
     setOpen(false);
@@ -41,17 +42,38 @@ const Dashboard = ({ user }) => {
   const captureValues = async (e) => {
     e.preventDefault();
 
-    const coords = await getCoordinates(`${address}, ${suburb}, ${state}`);
-    const location = {
-      name,
-      address: `${address}, ${suburb}, ${state}`,
-      coords,
-      type: "technology",
-    };
+    if (name.length > 1 && address.length > 1 && suburb.length > 1) {
+      const coords = await getCoordinates(`${address}, ${suburb}, ${state}`);
+      const location = {
+        name,
+        address: `${address}, ${suburb}, ${state}`,
+        coords,
+        type: "technology",
+      };
 
-    // add or update "new greeting" key in db
-    await database.ref("/").push(location);
-    console.log(location);
+      // add or update "new greeting" key in db
+      await database.ref("/").push(location);
+
+      // Resets
+      {
+        setState("");
+        setName("");
+        setAddress("");
+        setSuburb("");
+        setFeedback({
+          ...feedback,
+          success: "Added location successfully!",
+          error: "",
+        });
+      }
+    } else {
+      //respond with error
+      setFeedback({
+        ...feedback,
+        success: "",
+        error: "An error occurred, please check all fields.",
+      });
+    }
   };
 
   return (
@@ -60,7 +82,7 @@ const Dashboard = ({ user }) => {
         css={css`
           margin-top: 2em;
           margin-bottom: 2em;
-          height: 480px;
+          height: 520px;
         `}
         fixed
       >
@@ -158,6 +180,26 @@ const Dashboard = ({ user }) => {
             Submit
           </Button>
         </form>
+        <div>
+          {feedback.success.length > 1 ? (
+            <p
+              css={css`
+                color: green;
+              `}
+            >
+              {feedback.success}
+            </p>
+          ) : null}
+          {feedback.error.length > 1 ? (
+            <p
+              css={css`
+                color: red;
+              `}
+            >
+              {feedback.error}
+            </p>
+          ) : null}
+        </div>
       </Container>
     </div>
   );
