@@ -4,6 +4,9 @@ import { css, ClassNames } from "@emotion/core";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
+//
+import InputAdornment from "@material-ui/core/InputAdornment";
+import PinDropIcon from "@material-ui/icons/PinDrop";
 
 // Components
 import Writeup from "../js/components/Writeup";
@@ -18,22 +21,20 @@ import { props, compose, map } from "ramda";
 
 // Class component
 class Home extends React.Component {
-  // Test coordinates: auburn = [51, -0.08], uk [-33.8545702, 151.0255673]
+  // Test coordinates: auburn = [-33.8545702, 151.0255673]
   state = {
     searchLocation: [-33.8548157, 151.2164539],
     searchValue: "",
     locations: [],
   };
 
-  //
+  // Search for location entered on main page
   locationLookup = async (event) => {
     event.preventDefault();
 
     const res = await getCoordinates(this.state.searchValue);
 
     const { lat, lng } = res;
-
-    console.log(res);
 
     this.setState({
       searchLocation: [lat, lng],
@@ -82,19 +83,27 @@ class Home extends React.Component {
                 noValidate
                 autoComplete="off"
                 css={css`
+                  margin-top: 10px;
                   text-align: center;
                 `}
                 onSubmit={this.locationLookup}
               >
                 <TextField
-                  id="standard-basic"
-                  label="Enter your location"
+                  id=""
+                  label="Enter your suburb and state"
                   css={css`
                     width: 300px;
                   `}
                   name="mapsearch"
                   value={this.state.searchValue}
                   onChange={this.handleChange}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PinDropIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </form>
             </Writeup>

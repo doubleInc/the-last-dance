@@ -86,7 +86,26 @@ const Dashboard = ({ user }) => {
         `}
         fixed
       >
-        <h2>Dashboard</h2>
+        <Typography
+          variant="body1"
+          gutterBottom
+          css={css`
+            color: #1b5e20;
+            margin-left: 0.5em;
+            width: 80%;
+            background-color: #eee;
+          `}
+        >
+          <h2
+            css={css`
+              font-weight: 300;
+            `}
+          >
+            Enter a New Location
+          </h2>
+          Please fill out all fields below. Postcode is not required as location
+          look up will be done with suburb name and state provided.
+        </Typography>
         <form onSubmit={captureValues}>
           <TextField
             id="name"
@@ -94,6 +113,7 @@ const Dashboard = ({ user }) => {
             style={{ margin: 8 }}
             placeholder="Organisation name"
             helperText="Organisation name"
+            autoComplete="off"
             fullWidth
             margin="normal"
             value={name}
@@ -113,6 +133,7 @@ const Dashboard = ({ user }) => {
             placeholder="Street Address"
             helperText="Street address"
             fullWidth
+            autoComplete="off"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             margin="normal"

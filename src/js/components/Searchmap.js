@@ -1,3 +1,7 @@
+/*
+  Unused component! - Ignore
+*/
+
 import React from "react";
 import { css, ClassNames } from "@emotion/core";
 import TextField from "@material-ui/core/TextField";
@@ -11,8 +15,9 @@ const Searchmap = () => {
         text-align: center;
       `}
     >
+      <em>Enter your suburb and state</em>
       <TextField
-        id="standard-basic"
+        id=""
         label="Enter your suburb and state"
         css={css`
           width: 300px;
