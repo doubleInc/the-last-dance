@@ -27,6 +27,7 @@ const classes = {
     backgroundColor: green[900],
     border: "1px solid white",
     color: colors.white,
+    marginLeft: "1em",
   },
 };
 
@@ -45,9 +46,6 @@ const Userdash = (props) => {
           auth.signOut();
           navigate("/");
         }}
-        css={css`
-          margin-left: 0.5em;
-        `}
       >
         Log Out
       </Button>

@@ -27,17 +27,17 @@ class Navbar extends Component {
     currentUser: null,
   };
 
-  static LoggedIn = ({ on, usrimg }) =>
-    on ? <Userdash usrimg={usrimg} /> : null;
+  static LoggedIn = ({ on, usrimg, usr }) =>
+    on ? <Userdash usrimg={usrimg} user={usr} /> : null;
 
   static LoggedOut = ({ on }) =>
     on ? null : (
       <Button
         onClick={() => auth.signInWithPopup(googleAuthProvider)}
-        css={css`
-          color: white;
-          border: 1px solid white;
-        `}
+        style={{
+          border: "1px solid white",
+          color: "white",
+        }}
       >
         Log In
       </Button>
@@ -88,7 +88,8 @@ class Navbar extends Component {
             {React.Children.map(this.props.children, (child) =>
               React.cloneElement(child, {
                 on: this.state.loggedIn,
-                usrimg: usrimg,
+                usrimg,
+                usr: this.state.currentUser,
               })
             )}
           </Toolbar>
