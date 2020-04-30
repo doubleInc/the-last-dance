@@ -46,7 +46,7 @@ class Navbar extends Component {
   // component update before loading dom
   componentDidMount = async () => {
     await auth.onAuthStateChanged((currentUser) => {
-      console.log("AUTH_CHANGE", currentUser, this.state.loggedIn);
+      // check for logged in user
       if (currentUser !== null) {
         this.setState({
           currentUser,

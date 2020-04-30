@@ -29,4 +29,4 @@ const Main = ({ children }) => (
 );
 
 //export default Main;
-export default hot(module)(Main);
+export default Main;

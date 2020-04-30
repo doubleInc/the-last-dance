@@ -32,11 +32,16 @@ const Writeup = ({ children }) => {
           gutterBottom
           css={css`
             color: #1b5e20;
+            margin-top: 0.5em;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
           `}
         >
-          By recycling household waste you will help save precious natural
-          resources. Each year kerbside recycling can save 386,000 tonnes of
-          green house gasses. That's 64,000 cars off the road for a whole year!
+          By recycling household waste,{" "}
+          <strong>including old unused electrical equipment</strong> you will
+          help save precious natural resources. Each year kerbside recycling can
+          save 386,000 tonnes of green house gasses. That's 64,000 cars off the
+          road for a whole year! Find a drop off location near you.
         </Typography>
         {children}
       </Typography>
